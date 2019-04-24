@@ -1,5 +1,11 @@
 import React from 'react'
-import {StyleSheet, Text, View, TouchableWithoutFeedback} from 'react-native'
+import {
+    StyleSheet, 
+    Text, 
+    View, 
+    TouchableWithoutFeedback,
+    TouchableOpacity
+} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import moment from 'moment'
 import 'moment/locale/pt-br'
@@ -36,7 +42,7 @@ export default props => {
                 </Text>
 
                 <Text style={styles.date}>
-                    {moment(props.estimatedAt).locale('pt-br').format('ddd, D [de] MMMM')}
+                    {moment(props.estimatedAt).locale('pt-br').format('ddd, D [de] MMMM [de] YYYY')}
                 </Text>
             </View>
         </View>
