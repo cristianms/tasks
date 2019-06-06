@@ -1,0 +1,65 @@
+import React, {Component} from 'react'
+import {
+    StyleSheet, 
+    Text, 
+    TextInput,
+    View, 
+    ImageBackground,
+    TouchableOpacity,
+    Alert
+} from 'react-native'
+import commomStyles from '../commomStyles'
+import backgroundImage from '../../assets/imgs/login.jpg'
+
+export default class Auth extends Component {
+    state = {
+        stageNew: false,
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    }
+
+    signinOrSignup = () => {
+        if (this.state.stageNew) {
+            Alert.alert('Sucesso!', 'Criar conta!')
+        } else {
+            Alert.alert('Sucesso!', 'Logar')
+        }
+    }
+
+    render() {
+        return (
+            <ImageBackground source={backgroundImage} style={Styles.background}>
+                <Text style={Styles.title}>Tasks</Text>
+                <View style={Styles.formContainer}>
+                    <Text style={Styles.subtitle}>
+                        {this.state.stageNew ? 'Crie sua conta' : 'Informe seus dados'}
+                    </Text>
+                    {
+                        this.state.stageNew && 
+                        <TextInput placeholder='Nome' style={styles.input} value={this.state.name} onChangeText={name => this.setState({ name })} />
+                    }
+                    <TextInput placeholder='E-mail' style={styles.input} value={this.state.email} onChangeText={name => this.setState({ email })}/>
+                    <TextInput placeholder='Senha' style={styles.input} value={this.state.password} onChangeText={name => this.setState({ password })}/>
+                    {
+                        this.state.stageNew && 
+                        <TextInput placeholder='Confirme a senha' style={styles.input} value={this.state.confirmPassword} onChangeText={confirmPassword => this.setState({ confirmPassword })} />
+                    }
+                    <TouchableOpacity onPress={this.signinOrSignup}>
+                        <View style={styles.button}>
+                            <Text style={styles.buttonText}>
+                                {this.state.stageNew ? 'Registrar' : 'Entrar'}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{padding: 10}} onPress={this.setState({stageNew: !this.state.stageNew})}>
+                        <Text style={styles.buttonText}>
+                            {this.state.stageNew ? 'Já possui conta?' : 'Ainda não possui conta?'}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </ImageBackground>
+        )
+    }
+}

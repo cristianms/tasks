@@ -7,6 +7,7 @@ import {
     FlatList,
     TouchableOpacity,
     Platform,
+    AsyncStorage
 } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/pt-br'
@@ -20,22 +21,7 @@ import AddTask from './AddTask'
 export default class Agenda extends Component {
 
     state = {
-        tasks: [
-            {id: Math.random(), desc: 'Comprar curso de React Native1', estimateAt: new Date(), doneAt: new Date()},
-            {id: Math.random(), desc: 'Concluir o curso1', estimateAt: new Date(), doneAt: null},
-            {id: Math.random(), desc: 'Comprar curso de React Native2', estimateAt: new Date(), doneAt: new Date()},
-            {id: Math.random(), desc: 'Concluir o curso2', estimateAt: new Date(), doneAt: null},
-            {id: Math.random(), desc: 'Comprar curso de React Native3', estimateAt: new Date(), doneAt: new Date()},
-            {id: Math.random(), desc: 'Concluir o curso3', estimateAt: new Date(), doneAt: null},
-            {id: Math.random(), desc: 'Comprar curso de React Native4', estimateAt: new Date(), doneAt: new Date()},
-            {id: Math.random(), desc: 'Concluir o curso4', estimateAt: new Date(), doneAt: null},
-            {id: Math.random(), desc: 'Comprar curso de React Native5', estimateAt: new Date(), doneAt: new Date()},
-            {id: Math.random(), desc: 'Concluir o curso5', estimateAt: new Date(), doneAt: null},
-            {id: Math.random(), desc: 'Comprar curso de React Native6', estimateAt: new Date(), doneAt: new Date()},
-            {id: Math.random(), desc: 'Concluir o curso6', estimateAt: new Date(), doneAt: null},
-            {id: Math.random(), desc: 'Comprar curso de React Native7', estimateAt: new Date(), doneAt: new Date()},
-            {id: Math.random(), desc: 'Concluir o curso7', estimateAt: new Date(), doneAt: null},
-        ],
+        tasks: [],
         visibleTasks: [],
         showDoneTasks: true,
         showAddTask: false,
@@ -67,14 +53,19 @@ export default class Agenda extends Component {
             visibleTasks = this.state.tasks.filter(pending)
         }
         this.setState({visibleTasks})
+
+        AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
+
     }
 
     toggleFilter = () => {
         this.setState({showDoneTasks: !this.state.showDoneTasks}, this.filterTasks) //this.filterTasks tipo um callback nesse caso
     }
 
-    componentDidMount = () => {
-        this.filterTasks()
+    componentDidMount = async() => {
+        const data = await AsyncStorage.getItem('tasks')
+        const tasks = JSON.parse(data) || []
+        this.setState({tasks}, this.filterTasks)
     }
 
     toggleTask = id => {
