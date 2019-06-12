@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
     StyleSheet, 
     Text, 
@@ -30,10 +30,10 @@ export default class Auth extends Component {
 
     render() {
         return (
-            <ImageBackground source={backgroundImage} style={Styles.background}>
-                <Text style={Styles.title}>Tasks</Text>
-                <View style={Styles.formContainer}>
-                    <Text style={Styles.subtitle}>
+            <ImageBackground source={backgroundImage} style={styles.background}>
+                <Text style={styles.title}>Tasks</Text>
+                <View style={styles.formContainer}>
+                    <Text style={styles.subtitle}>
                         {this.state.stageNew ? 'Crie sua conta' : 'Informe seus dados'}
                     </Text>
                     {
@@ -63,3 +63,43 @@ export default class Auth extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    background: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontFamily: commomStyles.fontFamily,
+        color: '#FFF',
+        fontSize: 70,
+        marginBottom: 10,
+    },
+    subtitle: {
+        fontFamily: commomStyles.fontFamily,
+        color: '#FFF',
+        fontSize: 20,
+    },
+    formContainer: {
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        padding: 20,
+        width: '90%',
+    },
+    input: {
+        marginTop: 10,
+        backgroundColor: '#FFF',
+    },
+    button: {
+        backgroundColor: '#080',
+        marginTop: 10,
+        padding: 10,
+        alignItems: 'center',
+    },
+    buttonText: {
+        fontFamily: commomStyles.fontFamily,
+        color: '#FFF',
+        fontSize: 20
+    }
+})
