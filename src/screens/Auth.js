@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import commomStyles from '../commomStyles'
 import backgroundImage from '../../assets/imgs/login.jpg'
+import AuthInput from '../Components/AuthInput'
 
 export default class Auth extends Component {
     state = {
@@ -30,19 +31,16 @@ export default class Auth extends Component {
 
     render() {
         return (
-            <ImageBackground source={backgroundImage} 
-                style={styles.background}>
+            <ImageBackground source={backgroundImage} style={styles.background}>
                 <Text style={styles.title}>Tasks</Text>
                 <View style={styles.formContainer}>
                     <Text style={styles.subtitle}>
                         {this.state.stageNew ? 'Crie sua conta' : 'Informe seus dados'}
                     </Text>
-                    {this.state.stageNew && 
-                    <TextInput placeholder='Nome'   style={styles.input} value={this.state.name}     onChangeText={name =>     this.setState({ name })}     />}
-                    <TextInput placeholder='E-mail' style={styles.input} value={this.state.email}    onChangeText={email =>    this.setState({ email })}    />
-                    <TextInput placeholder='Senha'  style={styles.input} value={this.state.password} onChangeText={password => this.setState({ password })} />
-                    {this.state.stageNew && 
-                    <TextInput placeholder='Confirme a senha' style={styles.input} value={this.state.confirmPassword} onChangeText={confirmPassword => this.setState({ confirmPassword })} />}
+                    {this.state.stageNew && <AuthInput icon='user' placeholder='Nome'   style={styles.input} value={this.state.name}     onChangeText={name =>     this.setState({ name })}     />}
+                    <AuthInput icon='at'   placeholder='E-mail' style={styles.input} value={this.state.email}    onChangeText={email =>    this.setState({ email })}    />
+                    <AuthInput icon='lock' secureTextEntry={true} placeholder='Senha'  style={styles.input} value={this.state.password} onChangeText={password => this.setState({ password })} />
+                    {this.state.stageNew && <AuthInput icon='asterisk' secureTextEntry={true} placeholder='Confirme a senha' style={styles.input} value={this.state.confirmPassword} onChangeText={confirmPassword => this.setState({ confirmPassword })} />}
                     <TouchableOpacity onPress={this.signinOrSignup}>
                         <View style={styles.button}>
                             <Text style={styles.buttonText}>
@@ -84,10 +82,12 @@ const styles = StyleSheet.create({
         padding: 20,
         width: '90%',
     },
+    /*
     input: {
         marginTop: 10,
         backgroundColor: '#FFF',
     },
+    */
     button: {
         backgroundColor: '#080',
         marginTop: 10,
