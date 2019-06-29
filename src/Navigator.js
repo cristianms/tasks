@@ -3,6 +3,7 @@ import { createSwitchNavigator, createDrawerNavigator, createAppContainer } from
 import Agenda from './screens/Agenda'
 import Auth from './screens/Auth'
 import commomStyles from './commomStyles'
+import Menu from './screens/Menu'
 
 //rotas do drawer navigator (menu lateral)
 const MenuRoutes = {
@@ -38,6 +39,7 @@ const MenuRoutes = {
 
 const MenuConfig = {
     initialRouteName: 'Today',
+    contentComponent: Menu,
     contentOptions: {
         labelStyle: {
             fontFamily: commomStyles.fontFamily,
