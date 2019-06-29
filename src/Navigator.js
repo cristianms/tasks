@@ -2,6 +2,7 @@ import React from 'react'
 import { createSwitchNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation'
 import Agenda from './screens/Agenda'
 import Auth from './screens/Auth'
+import AuthOrApp from './screens/AuthOrApp'
 import commomStyles from './commomStyles'
 import Menu from './screens/Menu'
 
@@ -59,6 +60,10 @@ const MenuNavigator = createDrawerNavigator( MenuRoutes, MenuConfig )
 
 //rotas do switch navigator (navegacao sem menu)
 const MainRoutes = {
+    Loading: {
+        name: 'Loading',
+        screen: AuthOrApp,
+    },
     Auth: {
         name: 'Auth',
         screen: Auth,
@@ -70,7 +75,7 @@ const MainRoutes = {
     },
 }
 
-const MainNavigator = createAppContainer(createSwitchNavigator(MainRoutes, { initialRouteName: 'Auth' }))
+const MainNavigator = createAppContainer(createSwitchNavigator(MainRoutes, { initialRouteName: 'Loading' }))
 
 
 
